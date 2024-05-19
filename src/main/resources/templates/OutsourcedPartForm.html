@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Outsourced Part Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Outsourced Part Detail</h1>
+<form th:action="@{/showFormAddOutPart}" th:object="${outsourcedpart}" method="post">
+    <!-- Hidden field for ID to handle updates; it will not be shown to the user but is necessary for identifying the entity during update or delete operations -->
+    <p><input type="hidden" th:field="*{id}" /></p>
+
+    <!-- Text input field for the 'name' of the part -->
+    <p>Name: <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4" /></p>
+
+    <!-- Number input for the 'price' of the part -->
+    <p>Price: <input type="number" th:field="*{price}" placeholder="Price" class="form-control mb-4 col-4" /></p>
+
+    <!-- Number input for the 'inventory' (current stock) -->
+    <p>Inventory: <input type="number" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4" /></p>
+
+    <!-- Text input for the 'companyName' field specific to outsourced parts -->
+    <p>Company Name: <input type="text" th:field="*{companyName}" placeholder="Company Name" class="form-control mb-4 col-4" /></p>
+
+    <!-- Number inputs for specifying the minimum inventory level -->
+    <p>Minimum Inventory: <input type="number" th:field="*{minInventory}" placeholder="Minimum Inventory" class="form-control mb-4 col-4" /></p>
+
+    <!-- Number inputs for specifying the maximum inventory level -->
+    <p>Maximum Inventory: <input type="number" th:field="*{maxInventory}" placeholder="Maximum Inventory" class="form-control mb-4 col-4" /></p>
+
+    <!-- Error message for minimum inventory -->
+    <p th:if="${#fields.hasErrors('minInventory')}" th:errors="*{minInventory}" class="text-danger"></p>
+
+    <!-- Error message for maximum inventory -->
+    <p th:if="${#fields.hasErrors('maxInventory')}" th:errors="*{maxInventory}" class="text-danger"></p>
+
+    <!-- Error message for inventory range -->
+    <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}" class="text-danger"></p>
+
+    <!-- Submit button for the form -->
+    <p><input type="submit" value="Submit" class="btn btn-primary" /></p>
+</form>
+<!-- Link to return to the main screen, useful for navigation -->
+<a href="/">Return to Main Screen</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inhouse Part Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Inhouse Part Detail</h1>
+<form th:action="@{/showFormAddInPart}" th:object="${inhousepart}" method="post">
+    <p><input type="hidden" th:field="*{id}" /></p>
+    <p>Name: <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4" /></p>
+    <p>Price: <input type="number" th:field="*{price}" placeholder="Price" class="form-control mb-4 col-4" /></p>
+    <p>Inventory: <input type="number" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4" /></p>
+    <p>Minimum Inventory: <input type="number" th:field="*{minInventory}" placeholder="Minimum Inventory" class="form-control mb-4 col-4" /></p>
+    <p>Maximum Inventory: <input type="number" th:field="*{maxInventory}" placeholder="Maximum Inventory" class="form-control mb-4 col-4" /></p>
+    <!-- Error message for minimum inventory -->
+    <p th:if="${#fields.hasErrors('minInventory')}" th:errors="*{minInventory}" class="text-danger"></p>
+    <!-- Error message for maximum inventory -->
+    <p th:if="${#fields.hasErrors('maxInventory')}" th:errors="*{maxInventory}" class="text-danger"></p>
+    <!-- Error message for inventory range -->
+    <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}" class="text-danger"></p>
+    <p><input type="submit" value="Submit" class="btn btn-primary" /></p>
+</form>
+<a href="/">Return to Main Screen</a>
+</body>
+</html>
